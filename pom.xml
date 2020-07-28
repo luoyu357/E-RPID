@@ -3,7 +3,7 @@
   <groupId>ERPIDv2</groupId>
   <artifactId>ERPIDv2</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
+  <packaging>jar</packaging>
   
   <repositories>
    	<repository>
