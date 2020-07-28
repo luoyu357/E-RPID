@@ -18,7 +18,7 @@ The major goals of the E-RPID project fall into three distinct bins:
 
 ### Required Software
 
-1. Cordra (Object Service):
+1. Cordra (DTR Object Service):
    1. download the Cordra service from https://cordra.org/index.html
    2. follow the instructions to install and run the Cordra service
       1. create the proper schema for Cordra Objects in Cordra **Admin > Types** (please follow the `DTR Type format.json` under the `samples`)
@@ -36,3 +36,142 @@ Check out source codes:
 ```
 git clone https://github.com/luoyu357/E-RPID.git
 ```
+
+go to the source code folder:
+
+```
+cd E-RPID
+```
+
+### Updating the code based on your project
+
+#### update the `basicConfig.json` under `project > config`
+
+* upload the Handle service's URL in `API URL`
+* upload the Handle prefix in `prefix`
+* upload the path of Handle service's `admpriv.bin` in `private key file`
+* upload the password of Handle service in `private key file password`\
+* upload the handle admin identifier in `handle admin identifier`
+
+
+```
+{
+	"Handle System" :
+	{
+		"API URL" : "http://149.165.168.252:8000/api/handles/",
+		"prefix" : 11723,
+		"private key file" : "/path/admpriv.bin",
+		"private key file password" : "password",
+		"handle admin identifier" : "0.NA/11723"
+	}
+```
+* upload the Cordra's address in `InetAddress`
+* upload the port in `port`
+* upload the username of Cordra's account in `username`
+* upload the password of Cordra's account in `password`
+
+```
+	"DTR DOIP" :
+	{
+		"InetAddress" : "149.165.169.46",
+		"serviceID" : "20.500.123/service",
+		"port" : 9000,
+		"uesrname" : "username",
+		"password" : "password"
+	}
+}
+```
+
+#### upload your repository's information into the `repos.json` under `project > config`
+
+```
+{
+	"repo list" :
+	[
+		{
+			"repo name" : "dspace",
+			"repo description" : "ERPID test DSpace",
+			"repo host" : "http://34.214.32.90:8080/",
+			"repo type" : "rest",
+			"repo username" : "luoyu@dspace",
+			"repo password" : "dspace"
+		},
+		{
+			"repo name" : "fedora",
+			"repo description" : "fedora repository",
+			"repo host" : "http://54.213.12.174:8080/fcrepo-webapp-4.4.0/rest/",
+			"repo type" : "fedora",
+			"repo username" : "username",
+			"repo password" : "password"
+		},
+		{
+			"repo name" : "SEADTrain Github",
+			"repo description" : "SEADTrain Github",
+			"repo host" : "api.github.com",
+			"repo type" : "github",
+			"repo username" : "username",
+			"repo password" : "password"
+		},
+		{
+			"repo name" : "some_repo",
+			"repo description" : "Some repository",
+			"repo host" : "some.repo.com",
+			"repo type" : "",
+			"repo username" : "username",
+			"repo password" : "password"
+		}
+	]
+}
+```
+
+#### Add your pre-defined DTR types into the `src > indiana > edu > cordra > Type.java`
+
+```
+public static final String SENSORTYPE = "11723/9dbfb029092e96171074";
+public static final String DEVICEMODEL = "11723/22dde27488f42c5872e5";
+public static final String STARTDATE = "11723/87269431ee45c3e09809";
+```
+
+
+#### Please add your codes in `src > indiana > edu > engine > ReadData.java` to process your input data
+
+* we provide the sample code to process the sample data `2017-12-04.csv` in `project > input > upload`
+
+
+#### Add your codes to map the extracted data information with the DTR types
+
+* we provide the sample code `AirboxInstanceJSON.java` in `src > indiana > edu > cordra`
+
+* for creating the JSON object, please follow the `STR Schema.json` in `samples`
+
+#### Create the Cordra object by reading, processing and mapping the data
+
+* Modify the `src > indiana > edu > engine > Process.java` to generate the Cordra object (**Once**)
+
+```
+//******* process the input data and generate Cordra object json *******
+ReadData read = new ReadData();
+Hashtable<String, String> content = read.readContent(file.getAbsolutePath());			
+JSONObject AirboxCordraInstance = (new AirboxInstanceJSON()).AirboxCordraInstance(
+		content);
+//******* process the input data and generate Cordra object json *******
+```
+
+#### Add your codes for accessing your repository in `src > indiana > edu > repository`
+
+* we provide the sample code in `FedoraClient.java` to access the Fedora repository
+
+* Modify the `src > indiana > edu > engine > Process.java` to run your repository client (**Twice**)
+
+```
+//******* Repository *******
+if (repo.equalsIgnoreCase("Fedora")) {
+	FedoraClient fedora = new FedoraClient(this.configClass);
+	UUID uuid = UUID.randomUUID();
+	fedora.createContainer(uuid.toString());
+	location = fedora.uploadFile(uuid.toString(), file.getName(), file.getAbsolutePath());
+}
+//******* Repository *******
+```
+
+####

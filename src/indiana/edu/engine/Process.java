@@ -13,9 +13,9 @@ import java.util.UUID;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import indiana.edu.cordra.AirboxInstanceJSON;
 import indiana.edu.cordra.Cordra;
 import indiana.edu.cordra.DOIP;
-import indiana.edu.erpid.AirboxInstanceJSON;
 import indiana.edu.erpid.HandleSystem;
 import indiana.edu.mapping.MappingEngine;
 import indiana.edu.property.Config;
@@ -63,13 +63,17 @@ public class Process {
 	
 	
 	public void createProcess(File[] files, String repo) throws HandleException, Exception {
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		ReadData read = new ReadData();
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());	
 		DOIP doip = new DOIP(this.configClass);
 		for (File file : files) {
+			
+			//******* process the input data and generate Cordra object json *******
+			ReadData read = new ReadData();
 			Hashtable<String, String> content = read.readContent(file.getAbsolutePath());			
 			JSONObject AirboxCordraInstance = (new AirboxInstanceJSON()).AirboxCordraInstance(
 					content);
+			//******* process the input data and generate Cordra object json *******
+			
 			
 			try {	
 				JSONObject doipResult = doip.create(AirboxCordraInstance);

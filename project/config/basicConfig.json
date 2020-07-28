@@ -7,11 +7,6 @@
 		"private key file password" : "password",
 		"handle admin identifier" : "0.NA/11723"
 	},
-	"DTR" : 
-	{
-		"API URL" : "http://149.165.169.46:8080/objects/",
-		"prefix" : 11723
-	},
 	"DTR DOIP" :
 	{
 		"InetAddress" : "149.165.169.46",

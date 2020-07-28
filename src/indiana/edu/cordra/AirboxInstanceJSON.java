@@ -1,12 +1,9 @@
-package indiana.edu.erpid;
+package indiana.edu.cordra;
 
 import java.util.Hashtable;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-
-import indiana.edu.cordra.Type;
 
 public class AirboxInstanceJSON {
 	
