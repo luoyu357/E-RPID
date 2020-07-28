@@ -45,6 +45,7 @@ cd E-RPID
 
 ### Updating the code based on your project
 
+---
 #### update the `basicConfig.json` under `project > config`
 
 * upload the Handle service's URL in `API URL`
@@ -81,7 +82,7 @@ cd E-RPID
 	}
 }
 ```
-
+---
 #### upload your repository's information into the `repos.json` under `project > config`
 
 ```
@@ -123,7 +124,7 @@ cd E-RPID
 	]
 }
 ```
-
+---
 #### Add your pre-defined DTR types into the `src > indiana > edu > cordra > Type.java`
 
 ```
@@ -156,7 +157,7 @@ JSONObject AirboxCordraInstance = (new AirboxInstanceJSON()).AirboxCordraInstanc
 		content);
 //******* process the input data and generate Cordra object json *******
 ```
-
+---
 #### Add your codes for accessing your repository in `src > indiana > edu > repository`
 
 * we provide the sample code in `FedoraClient.java` to access the Fedora repository
@@ -173,5 +174,8 @@ if (repo.equalsIgnoreCase("Fedora")) {
 }
 //******* Repository *******
 ```
+---
 
-####
+### Operations
+
+asdas
