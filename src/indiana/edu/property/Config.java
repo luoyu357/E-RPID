@@ -13,7 +13,6 @@ import org.json.JSONObject;
 public class Config {
 	
 	public JSONObject config_basicConfig = new JSONObject();
-	public JSONObject config_pid_operation = new JSONObject();
 	public JSONObject config_repos = new JSONObject();
 	public String results;
 	public String operationLogs;
@@ -33,10 +32,8 @@ public class Config {
 	
 		//read the configurations 
 		String basicConfig = folderPath+"/config/basicConfig.json";
-		String pidOperation = folderPath+"/config/pid_operation.json";
 		String repos = folderPath+"/config/repos.json";
 		this.config_basicConfig = readConfig(basicConfig);
-		this.config_pid_operation = readConfig(pidOperation);
 		this.config_repos = readConfig(repos);
 		
 		//get the output path
