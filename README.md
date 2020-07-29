@@ -43,10 +43,10 @@ go to the source code folder:
 cd E-RPID
 ```
 
-### Updating the code based on your project
+#### Updating the code based on your project
 
 ---
-#### update the `basicConfig.json` under `project > config`
+##### Update the `basicConfig.json` under `project > config`
 
 * upload the Handle service's URL in `API URL`
 * upload the Handle prefix in `prefix`
@@ -83,7 +83,7 @@ cd E-RPID
 }
 ```
 ---
-#### upload your repository's information into the `repos.json` under `project > config`
+##### Upload your repository's information into the `repos.json` under `project > config`
 
 ```
 {
@@ -125,7 +125,7 @@ cd E-RPID
 }
 ```
 ---
-#### Add your pre-defined DTR types into the `src > indiana > edu > cordra > Type.java`
+##### Add your pre-defined DTR types into the `src > indiana > edu > cordra > Type.java`
 
 ```
 public static final String SENSORTYPE = "11723/9dbfb029092e96171074";
@@ -134,18 +134,18 @@ public static final String STARTDATE = "11723/87269431ee45c3e09809";
 ```
 
 
-#### Please add your codes in `src > indiana > edu > engine > ReadData.java` to process your input data
+##### Please add your codes in `src > indiana > edu > engine > ReadData.java` to process your input data
 
 * we provide the sample code to process the sample data `2017-12-04.csv` in `project > input > upload`
 
 
-#### Add your codes to map the extracted data information with the DTR types
+##### Add your codes to map the extracted data information with the DTR types
 
 * we provide the sample code `AirboxInstanceJSON.java` in `src > indiana > edu > cordra`
 
 * for creating the JSON object, please follow the `STR Schema.json` in `samples`
 
-#### Create the Cordra object by reading, processing and mapping the data
+##### Create the Cordra object by reading, processing and mapping the data
 
 * Modify the `src > indiana > edu > engine > Process.java` to generate the Cordra object (**Once**)
 
@@ -158,7 +158,7 @@ JSONObject AirboxCordraInstance = (new AirboxInstanceJSON()).AirboxCordraInstanc
 //******* process the input data and generate Cordra object json *******
 ```
 ---
-#### Add your codes for accessing your repository in `src > indiana > edu > repository`
+##### Add your codes for accessing your repository in `src > indiana > edu > repository`
 
 * we provide the sample code in `FedoraClient.java` to access the Fedora repository
 
@@ -174,6 +174,15 @@ if (repo.equalsIgnoreCase("Fedora")) {
 }
 //******* Repository *******
 ```
+---
+Finally, generate the runnable jar file:
+
+```
+mvn package
+```
+
+The `ERPIDv2-0.0.1-SNAPSHOT.jar` will be located at `target` folder
+
 ---
 
 ## Operations
