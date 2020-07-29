@@ -176,6 +176,74 @@ if (repo.equalsIgnoreCase("Fedora")) {
 ```
 ---
 
-### Operations
+## Operations
 
-asdas
+### Create
+
+Users add the input raw file into the `project > input > upload`, and run:
+
+```
+java -jar ERPIDv2-0.0.1-SNAPSHOT.jar /path/project create repository_name
+```
+
+The Mapper Client will register an PID and Cordra object for the data file. When the operation is done, the result will be written into `project > logs > operation_logs.log` and `project > output > results.txt`. Also, users could find the registered PIDs in these files.
+
+The error message will be written into `project > logs > operation_logs.log`, `project > logs > mapper_errors.log` and `project > output > results.txt`
+
+### Retrieve
+
+Users add the retrieving PIDs into the `project > config > retrieve_pid.txt` line by line, and run:
+
+```
+java -jar ERPIDv2-0.0.1-SNAPSHOT.jar /path/project retrieve
+```
+
+The Mapper Client will retrieve the PIDs and related Cordra object . When the operation is done, the mapping result will be written into `project > logs > operation_logs.log`, `project > logs > retrieve_pid_list.log` and `project > output > results.txt`.
+
+The error message will be written into `project > logs > operation_logs.log`, `project > logs > mapper_errors.log` and `project > output > results.txt`
+
+### Update
+
+There are two choices for updating: **Update the content of PID and Cordra ** and **Update the content of PID and Cordra with new file**
+
+If users are only modifying the PID and (or) Cordra content, they could use `project > input > update > updateSample.json`
+
+If users are modifying the PID and Cordra by replacing the incorrect data file, they could use the `project > input > update > advancedUpdateSample.json`
+
+The command is:
+
+```
+java -jar ERPIDv2-0.0.1-SNAPSHOT.jar /path/project update
+```
+
+When the operation is done, the result will be written into `project > logs > operation_logs.log`, `project > logs > update_pid_list.log` and `project > output > results.txt`.
+
+The error message will be written into `project > logs > operation_logs.log`, `project > logs > mapper_errors.log` and `project > output > results.txt`
+
+
+### Delete
+
+Users add the deleting PIDs into the `project > config > delete_pid.txt` line by line, and run:
+
+```
+java -jar ERPIDv2-0.0.1-SNAPSHOT.jar /path/project delete
+```
+
+When the operation is done, the result will be written into `project > logs > operation_logs.log`, `project > logs > delete_pid_list.log` and `project > output > results.txt`.
+
+The error message will be written into `project > logs > operation_logs.log`, `project > logs > mapper_errors.log` and `project > output > results.txt`
+
+
+## Appendix
+
+* `project > logs > delete_pid_list.log` contains the deleted PIDs
+
+* `project > logs > mapper_errors.log` contains the error messages for all Operations
+
+* `project > logs > operation_logs.log` contains the list of operations
+
+* `project > logs > retrieve_pid_list.log` contains the retrieved PIDs
+
+* `project > logs > update_pid_list.log` contains the updated PIDs
+
+* `project > output > results.txt` contains the mapping result for all Operations

@@ -45,10 +45,18 @@ public class Process {
 				JSONObject item = (JSONObject) items;
 				if (item.get("Type").toString().contains("cordraID")) {
 					if (!item.getString("Value").equals("Cordra Object deleted")) {
-						JSONObject dtrContent = doip.retrieve(item.getString("Value"));
-						dtrResult = (new MappingEngine(this.configClass)).mappingDTRObject(dtrContent);
 						intro = "[" + timestamp + "] DTR Reoslving: " + item.getString("Value");
-						this.configClass.writeToFile(dtrResult.toString(4), this.configClass.results, intro);
+						try {
+							JSONObject dtrContent = doip.retrieve(item.getString("Value"));
+							dtrResult = (new MappingEngine(this.configClass)).mappingDTRObject(dtrContent);
+							
+							this.configClass.writeToFile(dtrResult.toString(4), this.configClass.results, intro);
+							this.configClass.writeToFile("", this.configClass.operationLogs, intro);
+						} catch (Exception e) {
+							this.configClass.writeToFile("", this.configClass.results, intro+ " - Resolving failed");
+							this.configClass.writeToFile("", this.configClass.operationLogs, intro+ " - Resolving failed");
+							this.configClass.writeToFile("", this.configClass.errors, intro+ " - No such Cordra");
+						}
 					}
 				}
 			}		
