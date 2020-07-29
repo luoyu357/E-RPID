@@ -213,7 +213,7 @@ The error message will be written into `project > logs > operation_logs.log`, `p
 
 ### Update
 
-There are two choices for updating: **Update the content of PID and Cordra ** and **Update the content of PID and Cordra with new file**
+There are two choices for updating: **Update the content of PID and Cordra** and **Update the content of PID and Cordra with new file**
 
 If users are only modifying the PID and (or) Cordra content, they could use `project > input > update > updateSample.json`
 
